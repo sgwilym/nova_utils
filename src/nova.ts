@@ -332,7 +332,7 @@ export interface Environment {
   openURL(url: string, callback?: (success: boolean) => void): void;
 }
 
-export const nova: Environment = (globalThis as any).nova;
+export declare const nova: Environment;
 
 /// https://docs.nova.app/api-reference/extension/
 
