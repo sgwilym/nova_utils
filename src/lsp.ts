@@ -1,5 +1,5 @@
 import { LSP } from "../deps.ts";
-import { Range, TextDocument, TextEditor } from "./nova.ts";
+import { nova, Range, TextDocument, TextEditor } from "./nova.ts";
 import { openFile } from "./utils.ts";
 
 export function applyLSPEdits(
@@ -20,7 +20,7 @@ export function applyLSPEdits(
  * Does not suuport CreateFile, RenameFile, or DeleteFile operations
  * @param workspaceEdit - The edit provided by the LSP.
  */
-export default async function applyWorkspaceEdit(
+export async function applyWorkspaceEdit(
   workspaceEdit: LSP.WorkspaceEdit,
 ) {
   if (workspaceEdit.documentChanges) {

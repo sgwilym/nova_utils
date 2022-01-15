@@ -332,9 +332,7 @@ export interface Environment {
   openURL(url: string, callback?: (success: boolean) => void): void;
 }
 
-declare global {
-  var nova: Environment;
-}
+export const nova: Environment = (globalThis as any).nova;
 
 /// https://docs.nova.app/api-reference/extension/
 
@@ -804,6 +802,7 @@ export declare class Task {
 
 export interface TaskActionResolveContext<T extends Transferrable> {
   action: TaskName;
+  config?: Configuration;
   readonly data?: T;
 }
 
@@ -816,7 +815,7 @@ export declare class TaskCommandAction {
   readonly command: string;
 }
 
-/// https://docs.nova.app/api-reference/task-process-action/
+// https://docs.nova.app/api-reference/task-process-action/
 
 export declare class TaskProcessAction {
   constructor(
@@ -832,6 +831,7 @@ export declare class TaskProcessAction {
         | "jsonrpc"
         | number;
       matchers?: ReadonlyArray<string>;
+      shell?: boolean;
     },
   );
 }
