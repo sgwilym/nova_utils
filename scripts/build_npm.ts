@@ -23,16 +23,16 @@ await build({
   },
   package: {
     // package.json properties
-    name: "nova-extension",
+    name: "nova_utils",
     version: Deno.args[0],
     description: "Utilities and types for building Nova extensions",
     license: "MIT",
     repository: {
       type: "git",
-      url: "git+https://github.com/nova-extension",
+      url: "git+https://github.com/sgwilym/nova_utils",
     },
     bugs: {
-      url: "https://github.com/nova-extension",
+      url: "https://github.com/https://github.com/sgwilym/nova_utils",
     },
   },
 });

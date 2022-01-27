@@ -6,7 +6,7 @@ export function applyLSPEdits(
   editor: TextEditor,
   edits: Array<LSP.TextEdit>,
 ) {
-  editor.edit((textEditorEdit) => {
+  return editor.edit((textEditorEdit) => {
     for (const change of edits.reverse()) {
       const range = lspRangeToRange(editor.document, change.range);
       textEditorEdit.replace(range, change.newText);
@@ -44,7 +44,7 @@ export async function applyWorkspaceEdit(
         continue;
       }
 
-      applyLSPEdits(editor, change.edits);
+      return applyLSPEdits(editor, change.edits);
     }
   } // then fall back to the deprecated changes property
   else if (workspaceEdit.changes) {
@@ -59,7 +59,7 @@ export async function applyWorkspaceEdit(
         continue;
       }
 
-      applyLSPEdits(editor, changes);
+      return applyLSPEdits(editor, changes);
     }
   }
 }
