@@ -1,5 +1,4 @@
 import { LSP } from "../deps.ts";
-import { nova, Range, TextDocument, TextEditor } from "./nova.ts";
 import { openFile } from "./utils.ts";
 
 export function applyLSPEdits(
@@ -15,7 +14,7 @@ export function applyLSPEdits(
 }
 
 /**
- * Applies LSP workspace edits to a Nove workspace.
+ * Applies LSP workspace edits to a Nova workspace.
  * Will use the documentChanges property if available, and fallback to the deprecated changes property.
  * Does not suuport CreateFile, RenameFile, or DeleteFile operations
  * @param workspaceEdit - The edit provided by the LSP.
@@ -25,7 +24,7 @@ export async function applyWorkspaceEdit(
 ) {
   if (workspaceEdit.documentChanges) {
     // Look for the newer documentChanges property first
-    for (const change of workspaceEdit.documentChanges || []) {
+    for (const change of workspaceEdit.documentChanges) {
       // TODO: Suuport Create, Rename, Delete
       if (!("edits" in change)) {
         continue;
@@ -104,10 +103,11 @@ export function lspRangeToRange(
       rangeStart = chars + range.start.character;
     }
     if (range.end.line === lineIndex) {
-      rangeEnd = chars + range.end.character;
+      rangeEnd = chars + Math.min(lines[lineIndex].length, range.end.character);
       break;
     }
     chars += lineLength;
   }
+
   return new Range(rangeStart, rangeEnd);
 }

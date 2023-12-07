@@ -1,5 +1,3 @@
-import { nova, TextEditor, Transferrable, Workspace } from "./nova.ts";
-
 export function wrapCommand(
   command: (
     workspaceOrEditor: Workspace | TextEditor,

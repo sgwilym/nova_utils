@@ -1,5 +1,3 @@
-import { nova } from "./nova.ts";
-
 function getWorkspaceSetting(configKey: string): boolean | null {
   const str = nova.workspace.config.get(configKey, "string");
   switch (str) {
